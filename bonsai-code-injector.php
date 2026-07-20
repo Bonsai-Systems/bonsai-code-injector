@@ -25,11 +25,11 @@ use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 $bci_update_checker = PucFactory::buildUpdateChecker(
 	'https://github.com/The-Bonsai-Digital-Collective/bonsai-code-injector',
 	__FILE__,
-	'bonsai-code-injector'
+	'bonsai-code-injector',
+	6
 );
 
 $bci_update_checker->setBranch( 'main' );
-$bci_update_checker->setUpdateCheckInterval( 6 );
 $bci_update_checker->getVcsApi()->enableReleaseAssets();
 
 define( 'BCI_VERSION', '1.0.0' );

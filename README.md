@@ -54,4 +54,4 @@ To ship a new version:
 2. Commit and push to `main`.
 3. Publish a GitHub Release tagged with the new version (release-assets mode is enabled, so attach a zip of the plugin folder — plain source-archive tags won't be picked up).
 
-Sites check for updates every 6 hours (`setUpdateCheckInterval( 6 )`), or immediately if an admin clicks "Check again" on the Plugins screen.
+Sites check for updates every 6 hours (`$checkPeriod` argument to `buildUpdateChecker()`), or immediately if an admin clicks "Check again" on the Plugins screen.

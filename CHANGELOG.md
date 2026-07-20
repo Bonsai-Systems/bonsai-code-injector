@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed
+- [bonsai-code-injector.php] Removed call to `setUpdateCheckInterval()`, which doesn't exist on the v5.7 `PluginUpdateChecker` class and caused a fatal error on activation; the check interval is now passed via the `$checkPeriod` argument to `buildUpdateChecker()` instead
+
 ### Added
 - [bonsai-code-injector.php] Initial release: Settings page with Header Code and Body Code fields, output via `wp_head` (priority 1) and `wp_body_open`
 - [bonsai-code-injector.php] Capability gate (`manage_options`, filterable via `bonsai_code_injector_capability`) on settings page, save handler and sanitize callback
