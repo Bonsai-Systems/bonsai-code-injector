@@ -13,6 +13,25 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/*
+|--------------------------------------------------------------------------
+| Plugin Update Checker (via Composer)
+|--------------------------------------------------------------------------
+*/
+require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
+
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$bci_update_checker = PucFactory::buildUpdateChecker(
+	'https://github.com/The-Bonsai-Digital-Collective/bonsai-code-injector',
+	__FILE__,
+	'bonsai-code-injector'
+);
+
+$bci_update_checker->setBranch( 'main' );
+$bci_update_checker->setUpdateCheckInterval( 6 );
+$bci_update_checker->getVcsApi()->enableReleaseAssets();
+
 define( 'BCI_VERSION', '1.0.0' );
 define( 'BCI_OPTION_GROUP', 'bci_settings_group' );
 define( 'BCI_PAGE_SLUG', 'bonsai-code-injector' );

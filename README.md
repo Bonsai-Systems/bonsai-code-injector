@@ -43,3 +43,15 @@ Two options are stored:
 - `bci_body_code` (string)
 
 Both are deleted when the plugin is uninstalled.
+
+## Updates
+
+Ships with [YahnisElsts/plugin-update-checker](https://github.com/YahnisElsts/plugin-update-checker) (installed via Composer, `vendor/` committed) pointed at `github.com/The-Bonsai-Digital-Collective/bonsai-code-injector`. Sites with the plugin installed will see updates in **Plugins** in wp-admin, same as `bonsai-maintenance`.
+
+To ship a new version:
+
+1. Bump the `Version:` header in `bonsai-code-injector.php` and add a `CHANGELOG.md` entry.
+2. Commit and push to `main`.
+3. Publish a GitHub Release tagged with the new version (release-assets mode is enabled, so attach a zip of the plugin folder — plain source-archive tags won't be picked up).
+
+Sites check for updates every 6 hours (`setUpdateCheckInterval( 6 )`), or immediately if an admin clicks "Check again" on the Plugins screen.
