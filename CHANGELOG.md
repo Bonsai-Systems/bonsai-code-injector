@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-07-23
+
 ### Fixed
 - [composer.json] Fatal error (`Cannot declare class ComposerAutoloaderInit88bd1240a06e12371573341aa3549092, because the name is already in use`) when active alongside another Bonsai plugin bundling the same version of `yahnis-elsts/plugin-update-checker` (found via `cookie-consent-video-embed-CookieScript` on a live client site). This plugin's `composer.json` was byte-identical to several other Bonsai plugins', so Composer generated the same autoloader class name in every one of them. Added a unique `name` field to `composer.json` and regenerated `vendor/` from a clean install — new class name: `ComposerAutoloaderInit057850a63dccc1b5ea3cf2a346d50db8`.
 - [bonsai-code-injector.php] Removed call to `setUpdateCheckInterval()`, which doesn't exist on the v5.7 `PluginUpdateChecker` class and caused a fatal error on activation; the check interval is now passed via the `$checkPeriod` argument to `buildUpdateChecker()` instead
