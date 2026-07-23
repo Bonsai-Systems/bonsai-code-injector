@@ -1,19 +1,19 @@
 <?php return array(
     'root' => array(
-        'name' => '__root__',
+        'name' => 'bonsai-digital-collective/bonsai-code-injector',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '2e7246553517ac99a0c26a653cc3a4412d90df23',
+        'reference' => 'd76db7a7f2c8a7c617788796e6d2a69b578dc9cb',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => false,
     ),
     'versions' => array(
-        '__root__' => array(
+        'bonsai-digital-collective/bonsai-code-injector' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '2e7246553517ac99a0c26a653cc3a4412d90df23',
+            'reference' => 'd76db7a7f2c8a7c617788796e6d2a69b578dc9cb',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
