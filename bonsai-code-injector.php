@@ -23,7 +23,7 @@ require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 $bci_update_checker = PucFactory::buildUpdateChecker(
-	'https://github.com/The-Bonsai-Digital-Collective/bonsai-code-injector',
+	'https://github.com/Bonsai-Systems/bonsai-code-injector',
 	__FILE__,
 	'bonsai-code-injector',
 	6
