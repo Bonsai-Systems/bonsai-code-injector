@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-09-24
+
+### Fixed
+- [composer.json, vendor/] Fatal error (`Cannot declare class ComposerAutoloaderInit057850a63dccc1b5ea3cf2a346d50db8`) when active alongside Bonsai ActiveCampaign, whose `vendor/` was copied from this plugin and so shared the same autoloader class. The 1.1.1 fix (unique `name`) didn't hold because Composer reuses the suffix already in `vendor/autoload.php`. Set a fixed `config.autoloader-suffix` (`BonsaiCodeInjector`) so the class is now always `ComposerAutoloaderInitBonsaiCodeInjector`.
+
+### Added
+- [bonsai-code-injector.php] Duplicate install guard: if a second copy of the plugin loads (e.g. a GitHub source zip unpacked as `bonsai-code-injector-1.1/`), it now bails early and shows an admin notice instead of causing a fatal error. Constants moved above the update checker so the guard runs before the Composer autoloader is required.
+
 ## [1.1.1] - 2026-07-23
 
 ### Fixed

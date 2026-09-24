@@ -3,7 +3,7 @@
  * Plugin Name: Bonsai Code Injector
  * Plugin URI:  https://bonsaidigitalcollective.co.uk/
  * Description: Lets an administrator paste tracking / verification code (GA4, Google Tag Manager, Meta Pixel, etc.) into the site <head> and immediately after <body> — without editing theme files.
- * Version:     1.1.1
+ * Version:     1.1.2
  * Author:      The Bonsai Digital Collective
  * Author URI:  https://bonsaidigitalcollective.co.uk/
  * Requires at least: 6.0
@@ -12,6 +12,30 @@
  */
 
 defined( 'ABSPATH' ) || exit;
+
+/*
+|--------------------------------------------------------------------------
+| Duplicate install guard
+|--------------------------------------------------------------------------
+| If a second copy of this plugin is active (e.g. a GitHub "Source code" zip
+| unpacked as bonsai-code-injector-1.1/ alongside bonsai-code-injector/),
+| loading it would fatal on the Composer autoloader and bci_* functions.
+| Bail out and tell the admin instead of taking the site down.
+*/
+if ( defined( 'BCI_VERSION' ) ) {
+	add_action(
+		'admin_notices',
+		function () {
+			echo '<div class="notice notice-error"><p>' . esc_html__( 'Bonsai Code Injector is installed more than once. Please delete the duplicate plugin folder.', 'bonsai-code-injector' ) . '</p></div>';
+		}
+	);
+	return;
+}
+
+define( 'BCI_VERSION', '1.1.2' );
+define( 'BCI_OPTION_GROUP', 'bci_settings_group' );
+define( 'BCI_PAGE_SLUG', 'bonsai-code-injector' );
+define( 'BCI_CAPABILITY', apply_filters( 'bonsai_code_injector_capability', 'manage_options' ) );
 
 /*
 |--------------------------------------------------------------------------
@@ -31,11 +55,6 @@ $bci_update_checker = PucFactory::buildUpdateChecker(
 
 $bci_update_checker->setBranch( 'main' );
 $bci_update_checker->getVcsApi()->enableReleaseAssets();
-
-define( 'BCI_VERSION', '1.1.1' );
-define( 'BCI_OPTION_GROUP', 'bci_settings_group' );
-define( 'BCI_PAGE_SLUG', 'bonsai-code-injector' );
-define( 'BCI_CAPABILITY', apply_filters( 'bonsai_code_injector_capability', 'manage_options' ) );
 
 /**
  * NOTE ON ESCAPING (read before "fixing" this):
