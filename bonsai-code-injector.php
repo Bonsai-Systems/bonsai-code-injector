@@ -3,7 +3,7 @@
  * Plugin Name: Bonsai Code Injector
  * Plugin URI:  https://bonsaidigitalcollective.co.uk/
  * Description: Lets an administrator paste tracking / verification code (GA4, Google Tag Manager, Meta Pixel, etc.) into the site <head> and immediately after <body> — without editing theme files.
- * Version:     1.1.2
+ * Version:     1.2.0
  * Author:      The Bonsai Digital Collective
  * Author URI:  https://bonsaidigitalcollective.co.uk/
  * Requires at least: 6.0
@@ -32,10 +32,13 @@ if ( defined( 'BCI_VERSION' ) ) {
 	return;
 }
 
-define( 'BCI_VERSION', '1.1.2' );
+define( 'BCI_VERSION', '1.2.0' );
 define( 'BCI_OPTION_GROUP', 'bci_settings_group' );
 define( 'BCI_PAGE_SLUG', 'bonsai-code-injector' );
 define( 'BCI_CAPABILITY', apply_filters( 'bonsai_code_injector_capability', 'manage_options' ) );
+define( 'BCI_URL', plugin_dir_url( __FILE__ ) );
+
+require_once plugin_dir_path( __FILE__ ) . 'includes/admin-ui.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -121,6 +124,15 @@ function bci_register_settings() {
 	);
 }
 
+/*
+ * options.php checks manage_options for every option group unless told
+ * otherwise, so a filtered BCI_CAPABILITY could see the page but not save.
+ */
+add_filter( 'option_page_capability_' . BCI_OPTION_GROUP, 'bci_option_page_capability' );
+function bci_option_page_capability() {
+	return BCI_CAPABILITY;
+}
+
 /**
  * Trim only. Deliberately does not strip tags — see the escaping note above.
  */
@@ -202,15 +214,23 @@ function bci_render_settings_page() {
 		wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'bonsai-code-injector' ) );
 	}
 	?>
-	<div class="wrap">
-		<h1><?php esc_html_e( 'Bonsai Code Injector', 'bonsai-code-injector' ); ?></h1>
-		<p><?php esc_html_e( 'Paste tracking or verification code below. Only add code from sources you trust — it will run, unescaped, on every front-end page.', 'bonsai-code-injector' ); ?></p>
+	<div class="wrap bonsai-ui bonsai-ui--narrow">
+		<?php
+		bci_render_admin_header(
+			__( 'Bonsai Code Injector', 'bonsai-code-injector' ),
+			__( 'Adds tracking and verification code (GA4, Google Tag Manager, Meta Pixel and so on) to every front-end page without editing theme files.', 'bonsai-code-injector' )
+		);
+		?>
 		<form method="post" action="options.php">
-			<?php
-			settings_fields( BCI_OPTION_GROUP );
-			do_settings_sections( BCI_PAGE_SLUG );
-			submit_button();
-			?>
+			<?php settings_fields( BCI_OPTION_GROUP ); ?>
+
+			<section class="bonsai-ui-card" aria-labelledby="bci-code-title">
+				<h2 class="bonsai-ui-card__title" id="bci-code-title"><?php esc_html_e( 'Tracking code', 'bonsai-code-injector' ); ?></h2>
+				<p class="bonsai-ui-card__intro"><?php esc_html_e( 'Only add code from sources you trust. It runs, unescaped, on every front-end page.', 'bonsai-code-injector' ); ?></p>
+				<?php do_settings_sections( BCI_PAGE_SLUG ); ?>
+			</section>
+
+			<?php submit_button(); ?>
 		</form>
 	</div>
 	<?php

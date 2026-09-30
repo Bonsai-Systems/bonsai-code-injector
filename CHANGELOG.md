@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-09-30
+
+### Changed
+- [includes/admin-ui.php, assets/] Settings screen restyled with the Bonsai admin design system: logo header with version and GitHub/changelog links, fields in a card. Stylesheet loads on this screen only. No option or field changes.
+
+### Fixed
+- [bonsai-code-injector.php] Sites using the `bonsai_code_injector_capability` filter could open the settings page but not save it, because `options.php` still required `manage_options`. Added `option_page_capability_bci_settings_group`.
+
 ## [1.1.2] - 2026-09-24
 
 ### Fixed
