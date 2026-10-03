@@ -4,7 +4,7 @@ A minimal WordPress plugin for pasting tracking and verification code into a sit
 
 ## Features
 
-- Settings page under **Settings → Code Injector**
+- Settings page under **Bonsai → Code Injector**
 - **Header Code** field — printed as early as possible inside `<head>` on every front-end page (`wp_head`, priority 1). Use for the GA4 `gtag.js` snippet, the Google Tag Manager `<script>` block, or search-console-style meta verification tags.
 - **Body Code** field — printed immediately after the opening `<body>` tag via `wp_body_open`. Use for the Google Tag Manager `<noscript>` snippet.
 - Access restricted to `manage_options` by default (filterable via `bonsai_code_injector_capability`).
@@ -19,7 +19,7 @@ A minimal WordPress plugin for pasting tracking and verification code into a sit
 ## Usage
 
 1. Activate the plugin.
-2. Go to **Settings → Code Injector**.
+2. Go to **Bonsai → Code Injector**.
 3. Paste your GA4/GTM/other tracking snippets into the relevant field and save.
 
 ### Google Tag Manager
@@ -43,6 +43,14 @@ Two options are stored:
 - `bci_body_code` (string)
 
 Both are deleted when the plugin is uninstalled.
+
+## Bonsai menu
+
+This plugin's screens live in the shared **Bonsai** admin menu, provided by [Bonsai Hub](https://github.com/Bonsai-Systems/bonsai-hub). A copy of the hub is bundled in `lib/bonsai-hub/`, so this plugin sets up the menu on its own. Other Bonsai plugins appear alongside it, and **Bonsai → Plugins** installs, activates and deactivates the rest of the suite.
+
+- Don't edit `lib/bonsai-hub/` by hand. Change the bonsai-hub repo and run its `bin/sync.sh`.
+- Old `options-general.php?page=bonsai-code-injector` links redirect to the new screen.
+- Release zips must include `lib/`.
 
 ## Updates
 
