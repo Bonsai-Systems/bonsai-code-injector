@@ -3,7 +3,7 @@
  * Plugin Name: Bonsai Code Injector
  * Plugin URI:  https://bonsaidigitalcollective.co.uk/
  * Description: Lets an administrator paste tracking / verification code (GA4, Google Tag Manager, Meta Pixel, etc.) into the site <head> and immediately after <body> — without editing theme files.
- * Version:     1.3.0
+ * Version:     1.3.1
  * Author:      The Bonsai Digital Collective
  * Author URI:  https://bonsaidigitalcollective.co.uk/
  * Requires at least: 6.0
@@ -32,7 +32,7 @@ if ( defined( 'BCI_VERSION' ) ) {
 	return;
 }
 
-define( 'BCI_VERSION', '1.3.0' );
+define( 'BCI_VERSION', '1.3.1' );
 define( 'BCI_OPTION_GROUP', 'bci_settings_group' );
 define( 'BCI_PAGE_SLUG', 'bonsai-code-injector' );
 define( 'BCI_CAPABILITY', apply_filters( 'bonsai_code_injector_capability', 'manage_options' ) );
